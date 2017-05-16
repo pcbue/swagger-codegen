@@ -10,8 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+<<<<<<< HEAD
 import org.threeten.bp.OffsetDateTime;
+=======
+import org.joda.time.DateTime;
+import javax.validation.Valid;
+>>>>>>> origin/master
 import javax.validation.constraints.*;
+
 /**
  * MixedPropertiesAndAdditionalPropertiesClass
  */
@@ -36,6 +42,9 @@ public class MixedPropertiesAndAdditionalPropertiesClass   {
    * @return uuid
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public UUID getUuid() {
     return uuid;
   }
@@ -54,7 +63,14 @@ public class MixedPropertiesAndAdditionalPropertiesClass   {
    * @return dateTime
   **/
   @ApiModelProperty(value = "")
+<<<<<<< HEAD
   public OffsetDateTime getDateTime() {
+=======
+
+  @Valid
+
+  public DateTime getDateTime() {
+>>>>>>> origin/master
     return dateTime;
   }
 
@@ -80,6 +96,9 @@ public class MixedPropertiesAndAdditionalPropertiesClass   {
    * @return map
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public Map<String, Animal> getMap() {
     return map;
   }

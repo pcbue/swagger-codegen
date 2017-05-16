@@ -7,9 +7,16 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.UUID;
+<<<<<<< HEAD
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
+=======
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import javax.validation.Valid;
+>>>>>>> origin/master
 import javax.validation.constraints.*;
+
 /**
  * FormatTest
  */
@@ -66,7 +73,9 @@ public class FormatTest   {
    * @return integer
   **/
   @ApiModelProperty(value = "")
- @Min(10) @Max(100)  public Integer getInteger() {
+
+ @Min(10) @Max(100)
+  public Integer getInteger() {
     return integer;
   }
 
@@ -86,7 +95,9 @@ public class FormatTest   {
    * @return int32
   **/
   @ApiModelProperty(value = "")
- @Min(20) @Max(200)  public Integer getInt32() {
+
+ @Min(20) @Max(200)
+  public Integer getInt32() {
     return int32;
   }
 
@@ -104,6 +115,8 @@ public class FormatTest   {
    * @return int64
   **/
   @ApiModelProperty(value = "")
+
+
   public Long getInt64() {
     return int64;
   }
@@ -125,7 +138,10 @@ public class FormatTest   {
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
- @DecimalMin("32.1") @DecimalMax("543.2")  public BigDecimal getNumber() {
+
+  @Valid
+ @DecimalMin("32.1") @DecimalMax("543.2")
+  public BigDecimal getNumber() {
     return number;
   }
 
@@ -145,7 +161,9 @@ public class FormatTest   {
    * @return _float
   **/
   @ApiModelProperty(value = "")
- @DecimalMin("54.3") @DecimalMax("987.6")  public Float getFloat() {
+
+ @DecimalMin("54.3") @DecimalMax("987.6")
+  public Float getFloat() {
     return _float;
   }
 
@@ -165,7 +183,9 @@ public class FormatTest   {
    * @return _double
   **/
   @ApiModelProperty(value = "")
- @DecimalMin("67.8") @DecimalMax("123.4")  public Double getDouble() {
+
+ @DecimalMin("67.8") @DecimalMax("123.4")
+  public Double getDouble() {
     return _double;
   }
 
@@ -183,7 +203,9 @@ public class FormatTest   {
    * @return string
   **/
   @ApiModelProperty(value = "")
- @Pattern(regexp="/[a-z]/i")  public String getString() {
+
+ @Pattern(regexp="/[a-z]/i")
+  public String getString() {
     return string;
   }
 
@@ -202,6 +224,8 @@ public class FormatTest   {
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
+
+
   public byte[] getByte() {
     return _byte;
   }
@@ -220,6 +244,8 @@ public class FormatTest   {
    * @return binary
   **/
   @ApiModelProperty(value = "")
+
+
   public byte[] getBinary() {
     return binary;
   }
@@ -239,6 +265,9 @@ public class FormatTest   {
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
+
+  @Valid
+
   public LocalDate getDate() {
     return date;
   }
@@ -257,7 +286,14 @@ public class FormatTest   {
    * @return dateTime
   **/
   @ApiModelProperty(value = "")
+<<<<<<< HEAD
   public OffsetDateTime getDateTime() {
+=======
+
+  @Valid
+
+  public DateTime getDateTime() {
+>>>>>>> origin/master
     return dateTime;
   }
 
@@ -275,6 +311,9 @@ public class FormatTest   {
    * @return uuid
   **/
   @ApiModelProperty(value = "")
+
+  @Valid
+
   public UUID getUuid() {
     return uuid;
   }
@@ -294,7 +333,9 @@ public class FormatTest   {
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
- @Size(min=10,max=64)  public String getPassword() {
+
+ @Size(min=10,max=64)
+  public String getPassword() {
     return password;
   }
 

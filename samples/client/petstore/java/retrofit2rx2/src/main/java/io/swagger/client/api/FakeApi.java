@@ -11,8 +11,14 @@ import okhttp3.RequestBody;
 
 import java.math.BigDecimal;
 import io.swagger.client.model.Client;
+<<<<<<< HEAD
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
+=======
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import io.swagger.client.model.OuterComposite;
+>>>>>>> origin/master
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +27,50 @@ import java.util.Map;
 
 
 public interface FakeApi {
+  /**
+   * 
+   * Test serialization of outer boolean types
+   * @param body Input boolean as post body (optional)
+   * @return Call&lt;Boolean&gt;
+   */
+  @POST("fake/outer/boolean")
+  Observable<Boolean> fakeOuterBooleanSerialize(
+    @retrofit2.http.Body Boolean body
+  );
+
+  /**
+   * 
+   * Test serialization of object with outer number type
+   * @param body Input composite as post body (optional)
+   * @return Call&lt;OuterComposite&gt;
+   */
+  @POST("fake/outer/composite")
+  Observable<OuterComposite> fakeOuterCompositeSerialize(
+    @retrofit2.http.Body OuterComposite body
+  );
+
+  /**
+   * 
+   * Test serialization of outer number types
+   * @param body Input number as post body (optional)
+   * @return Call&lt;BigDecimal&gt;
+   */
+  @POST("fake/outer/number")
+  Observable<BigDecimal> fakeOuterNumberSerialize(
+    @retrofit2.http.Body BigDecimal body
+  );
+
+  /**
+   * 
+   * Test serialization of outer string types
+   * @param body Input string as post body (optional)
+   * @return Call&lt;String&gt;
+   */
+  @POST("fake/outer/string")
+  Observable<String> fakeOuterStringSerialize(
+    @retrofit2.http.Body String body
+  );
+
   /**
    * To test \&quot;client\&quot; model
    * To test \&quot;client\&quot; model
