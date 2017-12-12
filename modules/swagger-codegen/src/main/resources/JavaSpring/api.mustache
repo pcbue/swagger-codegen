@@ -100,7 +100,7 @@ public interface {{classname}} {
         produces = { {{#produces}}"{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}{{/produces}} }, {{/hasProduces}}{{#hasConsumes}}
         consumes = { {{#consumes}}"{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}{{/consumes}} },{{/hasConsumes}}{{/singleContentTypes}}
         method = RequestMethod.{{httpMethod}})
-    {{#jdk8}}default {{/jdk8}}{{#responseWrapper}}{{.}}<{{/responseWrapper}}ResponseEntity<{{>returnTypes}}>{{#responseWrapper}}>{{/responseWrapper}} {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}){{^jdk8}};{{/jdk8}}{{#jdk8}} {
+    {{#jdk8}}default {{/jdk8}}{{#responseWrapper}}{{.}}<{{/responseWrapper}}ResponseEntity<{{>returnTypes}}>{{#responseWrapper}}>{{/responseWrapper}} {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}{{#exposeRequestEntity}}{{#hasParams}}, {{/hasParams}}{{>requestEntityParam}}{{/exposeRequestEntity}}){{^jdk8}};{{/jdk8}}{{#jdk8}} {
         {{^isDelegate}}
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         {{#examples}}
@@ -122,6 +122,10 @@ public interface {{classname}} {
         return getDelegate().{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
         {{/isDelegate}}
     }{{/jdk8}}
+
+{{#headerParams}}{{#isEnum}}{{>enumInnerClass}}{{/isEnum}}{{/headerParams}}
+{{#queryParams}}{{#isEnum}}{{>enumInnerClass}}{{/isEnum}}{{/queryParams}}
+{{#pathParams}}{{#isEnum}}{{>enumInnerClass}}{{/isEnum}}{{/pathParams}}
 
 {{/operation}}
 }

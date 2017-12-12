@@ -33,6 +33,7 @@ public class SpringCodegen extends AbstractJavaCodegen
     public static final String SPRING_CLOUD_LIBRARY = "spring-cloud";
     public static final String IMPLICIT_HEADERS = "implicitHeaders";
     public static final String SWAGGER_DOCKET_CONFIG = "swaggerDocketConfig";
+    public static final String EXPOSE_REQUEST_ENTITY = "exposeRequestEntity";
 
     protected String title = "swagger-petstore";
     protected String configPackage = "io.swagger.configuration";
@@ -48,6 +49,7 @@ public class SpringCodegen extends AbstractJavaCodegen
     protected boolean implicitHeaders = false;
     protected boolean swaggerDocketConfig = false;
     protected boolean useOptional = false;
+    protected boolean exposeRequestEntity = false;
 
     public SpringCodegen() {
         super();
@@ -78,8 +80,8 @@ public class SpringCodegen extends AbstractJavaCodegen
         cliOptions.add(CliOption.newBoolean(USE_BEANVALIDATION, "Use BeanValidation API annotations"));
         cliOptions.add(CliOption.newBoolean(IMPLICIT_HEADERS, "Use of @ApiImplicitParams for headers."));
         cliOptions.add(CliOption.newBoolean(SWAGGER_DOCKET_CONFIG, "Generate Spring Swagger Docket configuration class."));
-        cliOptions.add(CliOption.newBoolean(USE_OPTIONAL,
-                "Use Optional container for optional parameters"));
+        cliOptions.add(CliOption.newBoolean(USE_OPTIONAL, "Use Optional container for optional parameters"));
+        cliOptions.add(CliOption.newBoolean(EXPOSE_REQUEST_ENTITY, "Expose RequestEntity as a parameter for generated methods"));
 
         supportedLibraries.put(DEFAULT_LIBRARY, "Spring-boot Server application using the SpringFox integration.");
         supportedLibraries.put(SPRING_MVC_LIBRARY, "Spring-MVC Server application using the SpringFox integration.");
@@ -196,6 +198,10 @@ public class SpringCodegen extends AbstractJavaCodegen
 
         if (additionalProperties.containsKey(SWAGGER_DOCKET_CONFIG)) {
             this.setSwaggerDocketConfig(Boolean.valueOf(additionalProperties.get(SWAGGER_DOCKET_CONFIG).toString()));
+        }
+
+        if (additionalProperties.containsKey(EXPOSE_REQUEST_ENTITY)) {
+            this.setExposeRequestEntity(Boolean.valueOf(additionalProperties.get(EXPOSE_REQUEST_ENTITY).toString()));
         }
 
         typeMapping.put("file", "Resource");
@@ -615,6 +621,10 @@ public class SpringCodegen extends AbstractJavaCodegen
 
     public void setSwaggerDocketConfig(boolean swaggerDocketConfig) {
         this.swaggerDocketConfig = swaggerDocketConfig;
+    }
+
+    public void setExposeRequestEntity(boolean exposeRequestEntity) {
+        this.exposeRequestEntity = exposeRequestEntity;
     }
 
     @Override

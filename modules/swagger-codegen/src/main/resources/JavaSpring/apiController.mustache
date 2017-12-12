@@ -98,7 +98,7 @@ public class {{classname}}Controller implements {{classname}} {
 {{/isDelegate}}
 {{^jdk8}}
 {{#operation}}
-    public {{#async}}Callable<{{/async}}ResponseEntity<{{>returnTypes}}>{{#async}}>{{/async}} {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}) {
+    public {{#async}}Callable<{{/async}}ResponseEntity<{{>returnTypes}}>{{#async}}>{{/async}} {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}{{#exposeRequestEntity}}{{#hasParams}}, {{/hasParams}}{{>requestEntityParam}}{{/exposeRequestEntity}}) {
         {{^isDelegate}}
         {{^async}}
         String accept = request.getHeader("Accept");
@@ -137,7 +137,7 @@ public class {{classname}}Controller implements {{classname}} {
         {{/async}}
         {{/isDelegate}}
         {{#isDelegate}}
-        return delegate.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+        return delegate.{{operationId}}({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}{{#exposeRequestEntity}}{{#hasParams}}, {{/hasParams}}requestEntity{{/exposeRequestEntity}});
         {{/isDelegate}}
     }
 

@@ -78,6 +78,22 @@ public class ApiClient {
      * Constructor for ApiClient
      */
     public ApiClient() {
+        // Setup authentications (key: authentication name, value: authentication).
+        this(authentications());
+    }
+
+    private static HashMap<String, Authentication> authentications() {
+        HashMap<String, Authentication> authentications = new HashMap<String, Authentication>();{{#authMethods}}{{#isBasic}}
+        authentications.put("{{name}}", new HttpBasicAuth());{{/isBasic}}{{#isApiKey}}
+        authentications.put("{{name}}", new ApiKeyAuth({{#isKeyInHeader}}"header"{{/isKeyInHeader}}{{^isKeyInHeader}}"query"{{/isKeyInHeader}}, "{{keyParamName}}"));{{/isApiKey}}{{#isOAuth}}
+        authentications.put("{{name}}", new OAuth());{{/isOAuth}}{{/authMethods}}
+        return authentications;
+    }
+
+    /*
+     * Constructor for ApiClient
+     */
+    public ApiClient(HashMap<String, Authentication> authentications) {
         httpClient = new OkHttpClient();
 
         {{#useGzipFeature}}
@@ -92,13 +108,8 @@ public class ApiClient {
         // Set default User-Agent.
         setUserAgent("{{#httpUserAgent}}{{{.}}}{{/httpUserAgent}}{{^httpUserAgent}}Swagger-Codegen/{{{artifactVersion}}}/java{{/httpUserAgent}}");
 
-        // Setup authentications (key: authentication name, value: authentication).
-        authentications = new HashMap<String, Authentication>();{{#authMethods}}{{#isBasic}}
-        authentications.put("{{name}}", new HttpBasicAuth());{{/isBasic}}{{#isApiKey}}
-        authentications.put("{{name}}", new ApiKeyAuth({{#isKeyInHeader}}"header"{{/isKeyInHeader}}{{^isKeyInHeader}}"query"{{/isKeyInHeader}}, "{{keyParamName}}"));{{/isApiKey}}{{#isOAuth}}
-        authentications.put("{{name}}", new OAuth());{{/isOAuth}}{{/authMethods}}
         // Prevent the authentications from being modified.
-        authentications = Collections.unmodifiableMap(authentications);
+        this.authentications = Collections.unmodifiableMap(authentications);
     }
 
     /**

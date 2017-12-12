@@ -77,8 +77,9 @@ public class SpringOptionsTest extends JavaClientOptionsTest {
             times = 1;
             clientCodegen.setSwaggerDocketConfig(Boolean.valueOf(SpringOptionsProvider.SWAGGER_DOCKET_CONFIG));
             times = 1;
-            clientCodegen.setUseOptional(
-                    Boolean.valueOf(SpringOptionsProvider.USE_OPTIONAL));
+            clientCodegen.setUseOptional(Boolean.valueOf(SpringOptionsProvider.USE_OPTIONAL));
+            times = 1;
+            clientCodegen.setUseOptional(Boolean.valueOf(SpringOptionsProvider.EXPOSE_REQUEST_ENTITY));
             times = 1;
         }};
     }
