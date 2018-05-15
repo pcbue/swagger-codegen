@@ -81,8 +81,7 @@ namespace IO.Swagger.Controllers
         [Route("/v2/pet/findByStatus")]
         [ValidateModelState]
         [SwaggerOperation("FindPetsByStatus")]
-        [SwaggerResponse(200, typeof(List<Pet>), "successful operation")]
-        [SwaggerResponse(400, typeof(List<Pet>), "Invalid status value")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<Pet>), description: "successful operation")]
         public virtual IActionResult FindPetsByStatus([FromQuery][Required()]List<string> status)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -92,6 +91,8 @@ namespace IO.Swagger.Controllers
             // return StatusCode(400);
 
             string exampleJson = null;
+            exampleJson = "<Pet>\n  <id>123456789</id>\n  <name>doggie</name>\n  <photoUrls>\n    <photoUrls>aeiou</photoUrls>\n  </photoUrls>\n  <tags>\n  </tags>\n  <status>aeiou</status>\n</Pet>";
+            exampleJson = "[ {\r\n  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],\r\n  \"name\" : \"doggie\",\r\n  \"id\" : 0,\r\n  \"category\" : {\r\n    \"name\" : \"name\",\r\n    \"id\" : 6\r\n  },\r\n  \"tags\" : [ {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  } ],\r\n  \"status\" : \"available\"\r\n}, {\r\n  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],\r\n  \"name\" : \"doggie\",\r\n  \"id\" : 0,\r\n  \"category\" : {\r\n    \"name\" : \"name\",\r\n    \"id\" : 6\r\n  },\r\n  \"tags\" : [ {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  } ],\r\n  \"status\" : \"available\"\r\n} ]";
             
             var example = exampleJson != null
             ? JsonConvert.DeserializeObject<List<Pet>>(exampleJson)
@@ -111,8 +112,7 @@ namespace IO.Swagger.Controllers
         [Route("/v2/pet/findByTags")]
         [ValidateModelState]
         [SwaggerOperation("FindPetsByTags")]
-        [SwaggerResponse(200, typeof(List<Pet>), "successful operation")]
-        [SwaggerResponse(400, typeof(List<Pet>), "Invalid tag value")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<Pet>), description: "successful operation")]
         public virtual IActionResult FindPetsByTags([FromQuery][Required()]List<string> tags)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -122,6 +122,8 @@ namespace IO.Swagger.Controllers
             // return StatusCode(400);
 
             string exampleJson = null;
+            exampleJson = "<Pet>\n  <id>123456789</id>\n  <name>doggie</name>\n  <photoUrls>\n    <photoUrls>aeiou</photoUrls>\n  </photoUrls>\n  <tags>\n  </tags>\n  <status>aeiou</status>\n</Pet>";
+            exampleJson = "[ {\r\n  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],\r\n  \"name\" : \"doggie\",\r\n  \"id\" : 0,\r\n  \"category\" : {\r\n    \"name\" : \"name\",\r\n    \"id\" : 6\r\n  },\r\n  \"tags\" : [ {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  } ],\r\n  \"status\" : \"available\"\r\n}, {\r\n  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],\r\n  \"name\" : \"doggie\",\r\n  \"id\" : 0,\r\n  \"category\" : {\r\n    \"name\" : \"name\",\r\n    \"id\" : 6\r\n  },\r\n  \"tags\" : [ {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  } ],\r\n  \"status\" : \"available\"\r\n} ]";
             
             var example = exampleJson != null
             ? JsonConvert.DeserializeObject<List<Pet>>(exampleJson)
@@ -142,9 +144,7 @@ namespace IO.Swagger.Controllers
         [Route("/v2/pet/{petId}")]
         [ValidateModelState]
         [SwaggerOperation("GetPetById")]
-        [SwaggerResponse(200, typeof(Pet), "successful operation")]
-        [SwaggerResponse(400, typeof(Pet), "Invalid ID supplied")]
-        [SwaggerResponse(404, typeof(Pet), "Pet not found")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Pet), description: "successful operation")]
         public virtual IActionResult GetPetById([FromRoute][Required]long? petId)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
@@ -157,6 +157,8 @@ namespace IO.Swagger.Controllers
             // return StatusCode(404);
 
             string exampleJson = null;
+            exampleJson = "<Pet>\n  <id>123456789</id>\n  <name>doggie</name>\n  <photoUrls>\n    <photoUrls>aeiou</photoUrls>\n  </photoUrls>\n  <tags>\n  </tags>\n  <status>aeiou</status>\n</Pet>";
+            exampleJson = "{\r\n  \"photoUrls\" : [ \"photoUrls\", \"photoUrls\" ],\r\n  \"name\" : \"doggie\",\r\n  \"id\" : 0,\r\n  \"category\" : {\r\n    \"name\" : \"name\",\r\n    \"id\" : 6\r\n  },\r\n  \"tags\" : [ {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"id\" : 1\r\n  } ],\r\n  \"status\" : \"available\"\r\n}";
             
             var example = exampleJson != null
             ? JsonConvert.DeserializeObject<Pet>(exampleJson)
@@ -225,13 +227,14 @@ namespace IO.Swagger.Controllers
         [Route("/v2/pet/{petId}/uploadImage")]
         [ValidateModelState]
         [SwaggerOperation("UploadFile")]
-        [SwaggerResponse(200, typeof(ApiResponse), "successful operation")]
+        [SwaggerResponse(statusCode: 200, type: typeof(ApiResponse), description: "successful operation")]
         public virtual IActionResult UploadFile([FromRoute][Required]long? petId, [FromForm]string additionalMetadata, [FromForm]System.IO.Stream file)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(ApiResponse));
 
             string exampleJson = null;
+            exampleJson = "{\r\n  \"code\" : 0,\r\n  \"type\" : \"type\",\r\n  \"message\" : \"message\"\r\n}";
             
             var example = exampleJson != null
             ? JsonConvert.DeserializeObject<ApiResponse>(exampleJson)
