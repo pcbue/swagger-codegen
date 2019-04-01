@@ -98,6 +98,9 @@ public class {{classname}}Controller implements {{classname}} {
 {{/isDelegate}}
 {{^jdk8}}
 {{#operation}}
+{{#isDeprecated}}
+    @Deprecated
+{{/isDeprecated}}
     public {{#async}}Callable<{{/async}}ResponseEntity<{{>returnTypes}}>{{#async}}>{{/async}} {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}{{#exposeRequestEntity}}{{#hasParams}}, {{/hasParams}}{{>requestEntityParam}}{{/exposeRequestEntity}}) {
         {{^isDelegate}}
         {{^async}}

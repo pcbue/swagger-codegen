@@ -3,7 +3,7 @@
     <parent>
         <groupId>io.swagger</groupId>
         <artifactId>swagger-codegen-project</artifactId>
-        <version>3.0.0.0-parkeon</version>
+        <version>3.0.0.1-parkeon</version>
         <relativePath>../..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
